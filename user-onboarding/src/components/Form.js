@@ -1,9 +1,23 @@
 import React from 'react';
+import { Form, Field, withFormik } from 'formik';
 
-function Form() {
+// Name, Email, Password, TOS(Checkbox), Submit Button
+
+function onboardForm() {
     return(
-        <div />
+        <Form>
+            <Field type="text" name="name" placeholder="Name" />
+            <Field type="email" name="email" placeholder="Email" />
+            <Field type="password" name="password" placeholder="password" />
+            <label>
+                I agree to the terms of service
+                <Field type="checkbox" name="tos" checked={''}/>
+            </label>
+            <button>Submit!</button>
+        </Form>
     )
 }
 
-export default Form;
+const formikForm = withFormik({})(onboardForm)
+
+export default formikForm;
