@@ -18,6 +18,15 @@ function onboardForm() {
     )
 }
 
-const formikForm = withFormik({})(onboardForm)
+const formikForm = withFormik({
+    mapPropsToValues({ name, email, password, tos }) {
+        return {
+            name: name || '',
+            email: email || '',
+            password: password || '',
+            tos: tos || false
+        }
+    }
+})(onboardForm)
 
 export default formikForm;
