@@ -16,16 +16,26 @@ const OnBoardForm = ({ values, status }) => {
     }, [status])
 
     return (
-        <Form>
-            <Field type="text" name="name" placeholder="Name" />
-            <Field type="email" name="email" placeholder="Email" />
-            <Field type="password" name="password" placeholder="password" />
-            <label>
-                I agree to the Terms of Service
-                <Field type="checkbox" name="tos" checked={values.tos}/>
-            </label>
-            <button>Submit!</button>
-        </Form>
+        <div>
+            <Form>
+                <Field type="text" name="name" placeholder="Name" />
+                <Field type="email" name="email" placeholder="Email" />
+                <Field type="password" name="password" placeholder="password" />
+                <label>
+                    I agree to the Terms of Service
+                    <Field type="checkbox" name="tos" checked={values.tos}/>
+                </label>
+                <button>Submit!</button>
+            </Form>
+            {users.map(user => {
+                return (
+                    <div>
+                        <h4>Name: {user.name}</h4>
+                        <p>Email: {user.email}</p>
+                    </div>
+                )
+            })}
+        </div>
     );
 };
 
