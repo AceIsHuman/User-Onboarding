@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Field, withFormik, yupToFormErrors } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
 
 // Name, Email, Password, TOS(Checkbox), Submit Button
 
@@ -33,7 +34,17 @@ const formikForm = withFormik({
         email: Yup.string().required('Please enter your email address'),
         password: Yup.string().required('A password is required'),
         tos: Yup.bool().oneOf([true], 'You must agree to the Terms of Service')
-    })
+    }),
+    handleSubmit(values, { setStatus, resetForm }) {
+        axios
+          .post("https://reqres.in/api/users", values)
+          .then(res => {
+            // console.log(res);
+            setStatus(res.data);
+            resetForm();
+          })
+          .catch(err => console.error(err));
+      }
 })(onboardForm)
 
 export default formikForm;
