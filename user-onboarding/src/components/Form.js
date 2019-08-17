@@ -3,7 +3,7 @@ import { Form, Field, withFormik } from 'formik';
 
 // Name, Email, Password, TOS(Checkbox), Submit Button
 
-function onboardForm() {
+function onboardForm({ values }) {
     return(
         <Form>
             <Field type="text" name="name" placeholder="Name" />
@@ -11,7 +11,7 @@ function onboardForm() {
             <Field type="password" name="password" placeholder="password" />
             <label>
                 I agree to the terms of service
-                <Field type="checkbox" name="tos" checked={''}/>
+                <Field type="checkbox" name="tos" checked={values.tos}/>
             </label>
             <button>Submit!</button>
         </Form>
