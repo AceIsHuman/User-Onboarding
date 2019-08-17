@@ -5,7 +5,7 @@ import axios from 'axios';
 
 // Name, Email, Password, TOS(Checkbox), Submit Button
 
-const OnBoardForm = ({ values, status }) => {
+const OnBoardForm = ({ touched, errors, values, status }) => {
     const [users, setUsers] = useState([]);
     // console.log(users);
 
@@ -18,13 +18,36 @@ const OnBoardForm = ({ values, status }) => {
     return (
         <div>
             <Form>
-                <Field type="text" name="name" placeholder="Name" />
-                <Field type="email" name="email" placeholder="Email" />
-                <Field type="password" name="password" placeholder="password" />
-                <label>
-                    I agree to the Terms of Service
-                    <Field type="checkbox" name="tos" checked={values.tos}/>
-                </label>
+                <div>
+                    <Field type="text" name="name" placeholder="Name" />
+                    {touched.name && errors.name && (
+                        <p>{errors.name}</p>
+                    )}
+                </div>
+                
+                <div>
+                    <Field type="email" name="email" placeholder="Email" />
+                    {touched.email && errors.email && (
+                        <p>{errors.email}</p>
+                    )}
+                </div>
+
+                <div>
+                    <Field type="password" name="password" placeholder="password" />
+                    {touched.password && errors.password && (
+                        <p>{errors.password}</p>
+                    )}
+                </div>
+
+                <div>
+                    <label>
+                        I agree to the Terms of Service
+                        <Field type="checkbox" name="tos" checked={values.tos}/>
+                        {touched.tos && errors.tos && (
+                            <p>{errors.tos}</p>
+                        )}
+                    </label>
+                </div>
                 <button>Submit!</button>
             </Form>
             {users.map(user => {
