@@ -1,12 +1,21 @@
-import React from 'react';
-import { Form, Field, withFormik, yupToFormErrors } from 'formik';
+import React, { useState, useEffect } from 'react';
+import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 
 // Name, Email, Password, TOS(Checkbox), Submit Button
 
-function onboardForm({ values }) {
-    return(
+const OnBoardForm = ({ values, status }) => {
+    const [users, setUsers] = useState([]);
+    // console.log(users);
+
+    useEffect(() => {
+        if (status) {
+            setUsers([...users, status]);
+        }
+    }, [status])
+
+    return (
         <Form>
             <Field type="text" name="name" placeholder="Name" />
             <Field type="email" name="email" placeholder="Email" />
@@ -17,8 +26,8 @@ function onboardForm({ values }) {
             </label>
             <button>Submit!</button>
         </Form>
-    )
-}
+    );
+};
 
 const formikForm = withFormik({
     mapPropsToValues({ name, email, password, tos }) {
@@ -45,6 +54,6 @@ const formikForm = withFormik({
           })
           .catch(err => console.error(err));
       }
-})(onboardForm)
+})(OnBoardForm)
 
 export default formikForm;
