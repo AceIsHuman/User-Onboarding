@@ -11,7 +11,7 @@ function onboardForm({ values }) {
             <Field type="email" name="email" placeholder="Email" />
             <Field type="password" name="password" placeholder="password" />
             <label>
-                I agree to the terms of service
+                I agree to the Terms of Service
                 <Field type="checkbox" name="tos" checked={values.tos}/>
             </label>
             <button>Submit!</button>
@@ -32,7 +32,7 @@ const formikForm = withFormik({
         name: Yup.string().required('Please enter your name'),
         email: Yup.string().required('Please enter your email address'),
         password: Yup.string().required('A password is required'),
-        tos: Yup.boolean()
+        tos: Yup.bool().oneOf([true], 'You must agree to the Terms of Service')
     })
 })(onboardForm)
 
