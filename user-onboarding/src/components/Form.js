@@ -27,7 +27,13 @@ const formikForm = withFormik({
             password: password || '',
             tos: tos || false
         }
-    }
+    },
+    validationSchema: Yup.object().shape({
+        name: Yup.string().required('Please enter your name'),
+        email: Yup.string().required('Please enter your email address'),
+        password: Yup.string().required('A password is required'),
+        tos: Yup.boolean()
+    })
 })(onboardForm)
 
 export default formikForm;
